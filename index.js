@@ -1,6 +1,9 @@
 const TelegramBot = require('node-telegram-bot-api');
 const last = require('array-last');
 
+const port = process.env.PORT || 8443;
+const host = process.env.HOST;
+
 const token = process.env.TELEGRAM_TOKEN;
 const adminUserId = process.env.ADMIN_ID;
 
@@ -8,7 +11,7 @@ const adminUserId = process.env.ADMIN_ID;
 let images = new Map();
 let currentKey = 0;
 
-const bot = new TelegramBot(token, {polling: true});
+const bot = new TelegramBot(token, {webHook: {port: port, host: host}});
 
 bot.onText(/\/ping/, (msg) => {
   const chatId = msg.chat.id;
