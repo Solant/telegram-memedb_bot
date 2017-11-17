@@ -1,8 +1,9 @@
 const TelegramBot = require('node-telegram-bot-api');
 const last = require('array-last');
 
-const port = process.env.PORT || 8443;
+const port = process.env.PORT || 443;
 const host = process.env.HOST;
+const externalUrl = 'https://memedb-bot.herokuapp.com/';
 
 const token = process.env.TELEGRAM_TOKEN;
 const adminUserId = process.env.ADMIN_ID;
@@ -12,6 +13,7 @@ let images = new Map();
 let currentKey = 0;
 
 const bot = new TelegramBot(token, {webHook: {port: port, host: host}});
+bot.setWebHook(externalUrl + ':' + port + '/bot' + token);
 
 bot.onText(/\/ping/, (msg) => {
   const chatId = msg.chat.id;
