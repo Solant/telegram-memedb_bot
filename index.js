@@ -62,7 +62,7 @@ bot.on('callback_query', (msg) => {
   const id = Number.parseInt(msg.data.substring(1));
 
   // Reinvented passport authentication service 
-  if (msg.from.id !== adminUserId) {
+  if (msg.from.id.toString() !== adminUserId) {
     bot.answerCallbackQuery(msg.id, 'Not authorized');
     return;
   }
